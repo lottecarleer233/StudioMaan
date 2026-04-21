@@ -10,9 +10,7 @@ const categoryNames = {
   "69a8aa7136d068f3089e6bdb": "ringen",
   "69a8a29aa7f742163a2eff39": "Oorbellen",
   "69a8a290ffb5f283afa41443": "Kettingen",
-  "69a85250395f7ca2ff433f11": "Styling",
-  "69a43be2b75c3e74816b62c7": "trends",
-  "699efb62ee05d1f40e83c2ea": "Cadeau",
+ 
 };
 
 //Test
@@ -121,9 +119,7 @@ const HomeScreen = ({ navigation }) => {
         <Picker.Item label="ringen" value="ringen" />
         <Picker.Item label="Oorbellen" value="Oorbellen" />
         <Picker.Item label="Kettingen" value="Kettingen" />
-        <Picker.Item label="Styling" value="Styling" />
-        <Picker.Item label="trends" value="trends" />
-        <Picker.Item label="Cadeau" value="Cadeau" />
+      
       </Picker>
 
       <Picker
