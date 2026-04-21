@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import { ScrollView, StyleSheet, Text, TextInput } from "react-native";
+import { ScrollView, StyleSheet, Text, TextInput, Switch, View, } from "react-native";
 import { useState, useEffect } from "react";
 import ProductCard from "../components/ProductCard.js";
 import BlogCard from "../components/BlogCard.js";
@@ -23,6 +23,9 @@ const HomeScreen = ({ navigation }) => {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [sortOption, setSortOption] = useState("price-asc");
+
+  const [showBlogs, setShowBlogs] = useState(true);
+
 
   useEffect(() => {
     fetch(
@@ -104,6 +107,11 @@ const HomeScreen = ({ navigation }) => {
         onChangeText={setSearchQuery}
       />
 
+      <View style={styles.switchContainer}>
+        <Text  style={styles.switchText}>Toon blogs</Text>
+       <Switch value={showBlogs} onValueChange={setShowBlogs} trackColor={{ false: "#ccc", true: "#651121" }} thumbColor={showBlogs ? "#fff" : "#f4f3f4"} />
+      </View>
+
       <Picker
         selectedValue={selectedCategory}
         onValueChange={setSelectedCategory}
@@ -141,18 +149,21 @@ const HomeScreen = ({ navigation }) => {
       ))}
 
       
+    {showBlogs && (
+        <>
+          <Text style={styles.title}>Blogs</Text>
 
-      <Text style={styles.title}>Blogs</Text>
-
-      {blogs.map((blog) => (
-        <BlogCard
-          key={blog.id}
-          title={blog.title}
-          description={blog.subtitle}
-          image={blog.image}
-          onPress={() => navigation.navigate("BlogDetail", blog)}
-        />
-      ))}
+          {blogs.map((blog) => (
+            <BlogCard
+              key={blog.id}
+              title={blog.title}
+              description={blog.subtitle}
+              image={blog.image}
+              onPress={() => navigation.navigate("BlogDetail", blog)}
+            />
+          ))}
+        </>
+      )}
 
       
 
@@ -194,6 +205,19 @@ const styles = StyleSheet.create({
     borderRadius: 12,
 
   },
+  switchContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    width: "90%",
+    maxWidth: 400,
+    
+  },
+  switchText: {
+  fontSize: 18,      // 👈 groter maken (bijv. 18 of 20)
+  fontWeight: "600", // optioneel: iets dikker
+  color: "#222",
+},
 
 });
 
